@@ -59,9 +59,13 @@ function createAddQuoteForm() {
 
   newQuoteText.value = '';
   newQuoteCategory.value = '';
+  saveQuotes();
 
   updateCategoryOptions();
   alert("Quote added successfully!");
+}
+function saveQuotes() {
+  localStorage.setItem("quotes", JSON.stringify(quotes));
 }
 
 // Event bindings

@@ -46,7 +46,7 @@ function updateCategoryOptions() {
 }
 
 // Add a new quote
-function addQuote() {
+function createAddQuoteForm() {
   const text = newQuoteText.value.trim();
   const category = newQuoteCategory.value.trim();
 

@@ -5,6 +5,9 @@ let quotes = [
   { text: "Kindness is a language which the deaf can hear and the blind can see.", category: "Wisdom" }
 ];
 
+// Fetch Server
+const SERVER_URL = "https://example.com/api/quotes"; 
+
 // DOM references
 const quoteDisplay = document.getElementById('quote-display');
 const newQuoteBtn = document.getElementById('new-quote');

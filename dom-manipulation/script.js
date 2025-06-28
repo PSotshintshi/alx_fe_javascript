@@ -56,22 +56,44 @@ function createAddQuoteForm() {
   }
 
   quotes.push({ text, category });
-
+  saveQuotes();
   newQuoteText.value = '';
   newQuoteCategory.value = '';
-  saveQuotes();
-
-  updateCategoryOptions();
+ const newEntry = { text, category };
+  quotes.push(newEntry);
+ // updateCategoryOptions();//
   alert("Quote added successfully!");
 }
+
+// Save quotes to local storage
 function saveQuotes() {
   localStorage.setItem("quotes", JSON.stringify(quotes));
+}
+
+// Load quotes from localStorage
+function loadQuotes() {
+  const storedQuotes = localStorage.getItem("quotes");
+  if (storedQuotes) {
+    quotes = JSON.parse(storedQuotes);
+   // quotes.forEach(displayQuote);//
+  }
+}
+// Session storage: display last viewed quote
+function updateLastViewedDisplay() {
+  const lastViewed = sessionStorage.getItem("lastViewed");
+  const display = document.getElementById("lastViewedQuote");
+  if (display && lastViewed) {
+    const { text, category } = JSON.parse(lastViewed);
+    display.textContent = `"${text}" — ${category}`;
+  }
 }
 
 // Event bindings
 document.addEventListener('DOMContentLoaded', () => {
   updateCategoryOptions();
   showRandomQuote();
+  showRandomQuote();
+  updateLastViewedDisplay();
 });
 
 newQuoteBtn.addEventListener('click', showRandomQuote);

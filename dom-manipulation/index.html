@@ -60,8 +60,10 @@
   <button id="addQuoteBtn">Add Quote</button>
 
   <!-- Add new quote -->
-   
-  <button onclick="ExportQuotes">Export Quotes to JSON</button>
+   <button onclick="ExportQuotes">Export Quotes to JSON</button>
+
+   <!-- import quotes -->
+<input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
 
 
   <!-- Last viewed quote (Session Storage) -->

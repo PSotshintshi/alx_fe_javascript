@@ -165,4 +165,45 @@ function populateCategories() {
 function filteredQuotes() {
 
 }
+// Simulate sync with mock server
+async function syncWithServer() {
+  try {
+    const res = await fetch(SERVER_URL);
+    const serverData = await res.json();
+
+    // Simulate server quotes using mock data
+    const serverQuotes = [
+      { text: "Success is not final, failure is not fatal.", category: "Motivation" },
+      { text: "What we think, we become.", category: "Mindset" }
+    ];
+
+    const localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
+    quotes = resolveConflicts(serverQuotes, localQuotes);
+    saveQuotes();
+    populateCategories();
+    filterQuotes();
+    notifyUser("Quotes synced with server.");
+  } catch (err) {
+    console.error("Sync failed:", err);
+    notifyUser("Failed to sync with server.");
+  }
+}
+
+// Conflict resolution: Server wins, local extras kept
+function resolveConflicts(server, local) {
+  const map = new Map();
+  server.forEach(q => map.set(q.text, q));
+  local.forEach(q => {
+    if (!map.has(q.text)) map.set(q.text, q);
+  });
+  return Array.from(map.values());
+}
+
+// Notification UI
+function notifyUser(msg) {
+  const box = document.getElementById("notification");
+  box.textContent = msg;
+  box.style.display = "block";
+  setTimeout(() => { box.style.display = "none"; }, 4000);
+}
 

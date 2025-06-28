@@ -32,18 +32,44 @@ function showRandomQuote() {
 }
 
 // Update category dropdown from unique categories
-function updateCategoryOptions() {
-  const uniqueCategories = [...new Set(quotes.map(q => q.category))];
+  //function updateCategoryOptions() {
+  //const uniqueCategories = [...new Set(quotes.map(q => q.category))];
 
   // Clear and re-add
-  categorySelect.innerHTML = `<option value="all">All</option>`;
+  //categorySelect.innerHTML = `<option value="all">All</option>`;
+  //uniqueCategories.forEach(cat => {
+  //  const option = document.createElement('option');
+ //   option.value = cat;
+  //  option.textContent = cat;
+//    categorySelect.appendChild(option);
+//  });
+//}
+//
+
+// Populate category filter dropdown
+function populateCategories() {
+  const uniqueCategories = [...new Set(quotes.map(q => q.category))];
+  categoryFilter.innerHTML = `<option value="all">All Categories</option>`;
   uniqueCategories.forEach(cat => {
     const option = document.createElement('option');
     option.value = cat;
     option.textContent = cat;
-    categorySelect.appendChild(option);
-  });
+    categoryFilter.appendChild(option);
+  }
+    );
+    // Restore last selected category
+  const lastSelected = localStorage.getItem("lastSelectedCategory");
+  if (lastSelected) {
+    categoryFilter.value = lastSelected;
+  }
 }
+//filter Quotes
+function filterQuotes() {
+  const selected = categoryFilter.value;
+  localStorage.setItem("lastSelectedCategory", selected);
+  showRandomQuote();
+}
+
 
 // Add a new quote
 function createAddQuoteForm() {
@@ -132,4 +158,11 @@ function importFromJsonFile(event) {
   fileReader.readAsText(event.target.files[0]);
 }
 
+//Populate Categories Dynamically//
+function populateCategories() {
+
+}
+function filteredQuotes() {
+
+}
 

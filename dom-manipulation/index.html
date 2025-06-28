@@ -53,6 +53,13 @@
   </select>
   <button id="new-quote">Show Random Quote</button>
 
+  <!-- Category Filter -->
+<label for="categoryFilter">Filter by Category:</label>
+<select id="categoryFilter" onchange="filterQuotes()">
+  <option value="all">All Categories</option>
+</select>
+
+
   <!-- Add new quote -->
   <h2>Add a New Quote</h2>
   <input type="text" id="newQuoteText" placeholder="Enter quote text" />
@@ -64,6 +71,13 @@
 
    <!-- import quotes -->
 <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+
+<!-- Add category filter -->
+
+ <select id="categoryFilter" onchange="filterQuotes()">
+    <option value="all">All Categories</option>
+    <!-- Dynamically populated categories -->
+  </select>
 
 
   <!-- Last viewed quote (Session Storage) -->

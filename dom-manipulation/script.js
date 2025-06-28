@@ -169,7 +169,7 @@ function filteredQuotes() {
 
 }
 // Simulate sync with mock server
-async function syncWithServer() {
+async function  fetchQuotesFromServer() {
   try {
     const res = await fetch(SERVER_URL);
     const serverData = await res.json();

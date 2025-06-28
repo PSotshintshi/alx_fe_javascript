@@ -6,7 +6,7 @@ let quotes = [
 ];
 
 // Fetch Server
-const SERVER_URL = "https://example.com/api/quotes"; 
+const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; 
 
 // DOM references
 const quoteDisplay = document.getElementById('quote-display');

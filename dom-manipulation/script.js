@@ -6,7 +6,7 @@ let quotes = [
 ];
 
 // Fetch Server
-const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; 
+const SERVER_URL = ""https://jsonplaceholder.typicode.com/posts"; 
 
 // DOM references
 const quoteDisplay = document.getElementById('quote-display');
@@ -169,18 +169,11 @@ function filteredQuotes() {
 
 }
 // Simulate sync with mock server
-async function  fetchQuotesFromServer() {
+async function syncWithServer() {
   try {
-    const res = await fetch(SERVER_URL);
-    const serverData = await res.json();
-
-    // Simulate server quotes using mock data
-    const serverQuotes = [
-      { text: "Success is not final, failure is not fatal.", category: "Motivation" },
-      { text: "What we think, we become.", category: "Mindset" }
-    ];
-
+    const serverQuotes = await fetchQuotesFromServer();
     const localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
+
     quotes = resolveConflicts(serverQuotes, localQuotes);
     saveQuotes();
     populateCategories();
@@ -190,6 +183,19 @@ async function  fetchQuotesFromServer() {
     console.error("Sync failed:", err);
     notifyUser("Failed to sync with server.");
   }
+}
+
+
+// Fetch quotes from server (simulated)
+async function fetchQuotesFromServer() {
+  const res = await fetch(SERVER_URL);
+  const serverData = await res.json();
+
+  // Simulate server quotes (you can replace this with real data if your API supports it)
+  return [
+    { text: "Success is not final, failure is not fatal.", category: "Motivation" },
+    { text: "What we think, we become.", category: "Mindset" }
+  ];
 }
 
 // Conflict resolution: Server wins, local extras kept

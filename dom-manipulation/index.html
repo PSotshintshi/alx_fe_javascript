@@ -1,35 +1,67 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Dynamic Quote Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    #quote-display p {
+      font-size: 1.2em;
+      font-style: italic;
+    }
+    #quote-display small {
+      display: block;
+      margin-top: 5px;
+      color: #555;
+    }
+    input, select, button {
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      cursor: pointer;
+    }
+    #lastViewedQuote {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
+
   <h1>Dynamic Quote Generator</h1>
 
-  <!-- Category Dropdown -->
+  <!-- Quote display -->
+  <div id="quote-display">
+    <p>Loading...</p>
+  </div>
+
+  <!-- Category filter -->
   <label for="category-select">Filter by Category:</label>
   <select id="category-select">
     <option value="all">All</option>
   </select>
+  <button id="new-quote">Show Random Quote</button>
 
-  <!-- Quote Display -->
-  <div id="quote-display" style="margin: 30px 0;"></div>
-  <select id="category-select"></select>
-<input type="text" id="newQuoteText" />
-<input type="text" id="newQuoteCategory" />
-<button id="addQuoteBtn">Add Quote</button>
-<button id="new-quote">New Quote</button>
-<p id="lastViewedQuote">None yet</p>
+  <!-- Add new quote -->
+  <h2>Add a New Quote</h2>
+  <input type="text" id="newQuoteText" placeholder="Enter quote text" />
+  <input type="text" id="newQuoteCategory" placeholder="Enter category" />
+  <button id="addQuoteBtn">Add Quote</button>
 
-  <!-- Form to Add Quote -->
-  <h3>Add a New Quote</h3>
-  <div>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button id="addQuoteBtn">Add Quote</button>
-  </div>
+  <!-- Last viewed quote (Session Storage) -->
+  <h2>Last Viewed Quote (Session)</h2>
+  <p id="lastViewedQuote">None yet</p>
 
   <script src="script.js"></script>
 </body>

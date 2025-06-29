@@ -236,3 +236,28 @@ async function postQuoteToServer(quote) {
     notifyUser("Failed to send quote to server.");
   }
 }
+async function syncQuotes() {
+  try {
+    const serverQuotes = await fetchQuotesFromServer();
+    const localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
+
+    const merged = resolveConflicts(serverQuotes, localQuotes);
+    quotes = merged;
+    saveQuotes();
+    populateCategories();
+    filterQuotes();
+
+    // Push any local-only quotes to server
+    const serverTexts = new Set(serverQuotes.map(q => q.text));
+    const newLocalQuotes = localQuotes.filter(q => !serverTexts.has(q.text));
+
+    for (const quote of newLocalQuotes) {
+      await postQuoteToServer(quote);
+    }
+
+    notifyUser("Sync complete.");
+  } catch (err) {
+    console.error("Error during sync:", err);
+    notifyUser("Sync failed.");
+  }
+}

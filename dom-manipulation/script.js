@@ -6,7 +6,7 @@ let quotes = [
 ];
 
 // Fetch Server
-const SERVER_URL = ""https://jsonplaceholder.typicode.com/posts"; 
+const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; 
 
 // DOM references
 const quoteDisplay = document.getElementById('quote-display');
@@ -216,3 +216,23 @@ function notifyUser(msg) {
   setTimeout(() => { box.style.display = "none"; }, 4000);
 }
 
+// Send a new quote to the server
+async function postQuoteToServer(quote) {
+  try {
+    const res = await fetch(SERVER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(quote)
+    });
+
+    if (!res.ok) throw new Error("Failed to post quote");
+
+    const result = await res.json();
+    console.log("Posted to server:", result);
+  } catch (err) {
+    console.error("Error posting quote:", err);
+    notifyUser("Failed to send quote to server.");
+  }
+}

@@ -261,3 +261,12 @@ async function syncQuotes() {
     notifyUser("Sync failed.");
   }
 }
+document.addEventListener("DOMContentLoaded", () => {
+  loadQuotes();
+  populateCategories();
+  filterQuotes();
+  updateLastViewedDisplay();
+
+  // 🔁 Periodic sync every 30 seconds
+  setInterval(syncQuotes, 30000);
+});

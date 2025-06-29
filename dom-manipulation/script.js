@@ -255,7 +255,7 @@ async function syncQuotes() {
       await postQuoteToServer(quote);
     }
 
-    notifyUser("Sync complete.");
+    notifyUser("Quotes synced with server!");
   } catch (err) {
     console.error("Error during sync:", err);
     notifyUser("Sync failed.");
